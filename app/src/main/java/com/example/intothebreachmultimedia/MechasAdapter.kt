@@ -7,7 +7,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 
 import androidx.recyclerview.widget.RecyclerView
-class MechasAdapter(private val mechaList: List<Mecha>,
+class MechasAdapter(private var mechaList: List<Mecha>,
                     private val onItemClick: (Mecha) -> Unit
                     ) : RecyclerView.Adapter<MechasAdapter.MechaViewHolder>() {
 
