@@ -15,9 +15,9 @@ class ShowMechasActivity: AppCompatActivity() {
     private var idx = 0
 
 
-    private val mechaList = listOf(Mecha("No se x1",R.drawable.into_the_breach_img),
-        Mecha("No se x2",R.drawable.into_the_breach_img),
-        Mecha("No se x3",R.drawable.into_the_breach_img),
+    private val mechaList = listOf(Mecha("No se x1",R.drawable.meck1 ),
+        Mecha("Mech 2",R.drawable.meck2),
+        Mecha("Mech 3",R.drawable.meck3),
         Mecha("No se x4",R.drawable.into_the_breach_img),
         Mecha("No se x5",R.drawable.into_the_breach_img),
         Mecha("No se x6",R.drawable.into_the_breach_img))
