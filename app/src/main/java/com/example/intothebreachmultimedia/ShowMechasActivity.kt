@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.View
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -13,6 +14,8 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 
 class ShowMechasActivity: AppCompatActivity() {
+
+    private lateinit var importedFrameLayout: FrameLayout
 
     private var idx = 0
     private var mediaPlayer: MediaPlayer? = null
@@ -25,6 +28,7 @@ class ShowMechasActivity: AppCompatActivity() {
     private val MINIMUN_LEGHT = 0
     private val MAXIMUN_LEGHT = mechaList.size - 1
 
+
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,14 +38,14 @@ class ShowMechasActivity: AppCompatActivity() {
             (View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
 
         val rvMechas = findViewById<RecyclerView>(R.id.RVMechas)
-
         val actualMechaList = mutableListOf<Mecha>()
         actualMechaList.add(mechaList[MINIMUN_LEGHT])
 
         val adapter = setRecyclerView(rvMechas, actualMechaList)
-
         val btnRight = findViewById<ImageView>(R.id.BtnRight)
         val btnLeft = findViewById<ImageView>(R.id.BtnLeft)
+        importedFrameLayout = findViewById(R.id.mecha_animation);
+
 
         btnRight.setOnClickListener{
             if (MINIMUN_LEGHT != idx) {
@@ -55,6 +59,11 @@ class ShowMechasActivity: AppCompatActivity() {
             adapter.notifyDataSetChanged()
             val currentMecha = mechaList[idx]
             playMechaSound(currentMecha.imgMecha)
+
+            // -------- Animacion mecha --------
+            if (importedFrameLayout.getVisibility() == View.VISIBLE) {
+                importedFrameLayout.setVisibility(View.GONE);
+            }
         }
 
         btnLeft.setOnClickListener{
@@ -65,6 +74,11 @@ class ShowMechasActivity: AppCompatActivity() {
             adapter.notifyDataSetChanged()
             val currentMecha = mechaList[idx]
             playMechaSound(currentMecha.imgMecha)
+
+            // -------- Animacion mecha --------
+            if (importedFrameLayout.getVisibility() == View.VISIBLE) {
+                importedFrameLayout.setVisibility(View.GONE);
+            }
         }
 
         // Configurar el swipe
@@ -105,6 +119,7 @@ class ShowMechasActivity: AppCompatActivity() {
     private fun setRecyclerView(rvMechas: RecyclerView,mechaList: List<Mecha>): MechasAdapter {
         val adapter = MechasAdapter(mechaList) { selectedMecha ->
             Toast.makeText(this, "Seleccionaste: ${selectedMecha.nameMecha}", Toast.LENGTH_SHORT).show()
+            importedFrameLayout.visibility = FrameLayout.VISIBLE
         }
         rvMechas.layoutManager = GridLayoutManager(this,1,GridLayoutManager.HORIZONTAL,false)
         rvMechas.adapter = adapter

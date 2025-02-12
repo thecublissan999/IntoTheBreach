@@ -14,6 +14,11 @@
         android:clickable="true"
         android:focusable="true"
         />
+    <include
+        android:id="@+id/mecha_animation"
+        layout="@layout/mecha_animation"
+        android:visibility="gone"
+        />
 
     <ImageButton
         android:id="@+id/BtnRight"
